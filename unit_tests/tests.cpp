@@ -8,13 +8,16 @@ TEST(RulesTests, AliveLessThanTwoNeighborsDies) {
     
     //arrange
     CellState current = ALIVE;
-    int liveNeighbors = 1;
+    int liveNeighborsZero = 0;
+    int liveNeighborsOne = 1;
 
     //act
-    CellState result = LR.GetNewState(current, liveNeighbors);
+    CellState resultZero = LR.GetNewState(current, liveNeighborsZero);
+    CellState resultOne = LR.GetNewState(current, liveNeighborsOne);
 
     //assert
-    EXPECT_EQ(result, DEAD);
+    EXPECT_EQ(resultZero, DEAD);
+    EXPECT_EQ(resultOne, DEAD);
 }
 
 TEST(RulesTests, AliveTwoToThreeNeighborsLives) {
@@ -22,13 +25,16 @@ TEST(RulesTests, AliveTwoToThreeNeighborsLives) {
 
     //arrange
     CellState current = ALIVE;
-    int liveNeighbors = 3;
+    int liveNeighborsTwo = 2;
+    int liveNeighborsThree = 3;
     
     //act
-    CellState result = LR.GetNewState(current, liveNeighbors);
+    CellState resultTwo = LR.GetNewState(current, liveNeighborsTwo);
+    CellState resultThree = LR.GetNewState(current, liveNeighborsThree);
 
     //assert
-    EXPECT_EQ(result, ALIVE);
+    EXPECT_EQ(resultTwo, ALIVE);
+    EXPECT_EQ(resultThree, ALIVE);
 }
 
 TEST(RulesTests, AliveMoreThanThreeNeighborsDies) {
@@ -36,13 +42,25 @@ TEST(RulesTests, AliveMoreThanThreeNeighborsDies) {
 
     //arrange
     CellState current = ALIVE;
-    int liveNeighbors = 4;
+    int liveNeighborsFour = 4;
+    int liveNeighborsFive = 5;
+    int liveNeighborsSix = 6;
+    int liveNeighborsSeven = 7;
+    int liveNeighborsEight = 8;
 
     //act
-    CellState result = LR.GetNewState(current, liveNeighbors);
-    
+    CellState resultFour = LR.GetNewState(current, liveNeighborsFour);
+    CellState resultFive = LR.GetNewState(current, liveNeighborsFive);
+    CellState resultSix = LR.GetNewState(current, liveNeighborsSix);
+    CellState resultSeven = LR.GetNewState(current, liveNeighborsSeven);
+    CellState resultEight = LR.GetNewState(current, liveNeighborsEight);
+
     //assert
-    EXPECT_EQ(result, DEAD);
+    EXPECT_EQ(resultFour, DEAD);
+    EXPECT_EQ(resultFive, DEAD);
+    EXPECT_EQ(resultSix, DEAD);
+    EXPECT_EQ(resultSeven, DEAD);
+    EXPECT_EQ(resultEight, DEAD);    
 }
 
 TEST(RulesTests, DeadThreeNeighborsLives) {
@@ -50,13 +68,37 @@ TEST(RulesTests, DeadThreeNeighborsLives) {
 
     //arrange
     CellState current = DEAD;
-    int liveNeighbors = 3;
+    int liveNeighborsZero = 0;
+    int liveNeighborsOne = 1;
+    int liveNeighborsTwo = 2;
+    int liveNeighborsThree = 3;
+    int liveNeighborsFour = 4;
+    int liveNeighborsFive = 5;
+    int liveNeighborsSix = 6;
+    int liveNeighborsSeven = 7;
+    int liveNeighborsEight = 8;
 
     //act
-    CellState result = LR.GetNewState(current, liveNeighbors);
+    CellState resultZero = LR.GetNewState(current, liveNeighborsZero);
+    CellState resultOne = LR.GetNewState(current, liveNeighborsOne);
+    CellState resultTwo = LR.GetNewState(current, liveNeighborsTwo);
+    CellState resultThree = LR.GetNewState(current, liveNeighborsThree);
+    CellState resultFour = LR.GetNewState(current, liveNeighborsFour);
+    CellState resultFive = LR.GetNewState(current, liveNeighborsFive);
+    CellState resultSix = LR.GetNewState(current, liveNeighborsSix);
+    CellState resultSeven = LR.GetNewState(current, liveNeighborsSeven);
+    CellState resultEight = LR.GetNewState(current, liveNeighborsEight);
 
     //assert
-    EXPECT_EQ(result, ALIVE);
+    EXPECT_EQ(resultZero, DEAD);
+    EXPECT_EQ(resultOne, DEAD);
+    EXPECT_EQ(resultTwo, DEAD);
+    EXPECT_EQ(resultThree, ALIVE);
+    EXPECT_EQ(resultFour, DEAD);
+    EXPECT_EQ(resultFive, DEAD);
+    EXPECT_EQ(resultSix, DEAD);
+    EXPECT_EQ(resultSeven, DEAD);
+    EXPECT_EQ(resultEight, DEAD);
 }
 
 int main(int argc, char **argv) {
