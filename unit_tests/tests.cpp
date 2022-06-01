@@ -8,16 +8,14 @@ TEST(RulesTests, AliveLessThanTwoNeighborsDies) {
     
     //arrange
     CellState current = ALIVE;
-    int liveNeighborsZero = 0;
-    int liveNeighborsOne = 1;
 
     //act
-    CellState resultZero = LR.GetNewState(current, liveNeighborsZero);
-    CellState resultOne = LR.GetNewState(current, liveNeighborsOne);
+    for(int liveNeighbors = 0; liveNeighbors <= 1; liveNeighbors++) {
+        CellState result = LR.GetNewState(current, liveNeighbors);
 
-    //assert
-    EXPECT_EQ(resultZero, DEAD);
-    EXPECT_EQ(resultOne, DEAD);
+        //assert
+        EXPECT_EQ(result, DEAD);
+    }
 }
 
 TEST(RulesTests, AliveTwoToThreeNeighborsLives) {
@@ -25,16 +23,14 @@ TEST(RulesTests, AliveTwoToThreeNeighborsLives) {
 
     //arrange
     CellState current = ALIVE;
-    int liveNeighborsTwo = 2;
-    int liveNeighborsThree = 3;
     
     //act
-    CellState resultTwo = LR.GetNewState(current, liveNeighborsTwo);
-    CellState resultThree = LR.GetNewState(current, liveNeighborsThree);
+    for (int liveNeighbors = 2; liveNeighbors <= 3; liveNeighbors++) {
+        CellState result = LR.GetNewState(current, liveNeighbors);
 
-    //assert
-    EXPECT_EQ(resultTwo, ALIVE);
-    EXPECT_EQ(resultThree, ALIVE);
+        //assert
+        EXPECT_EQ(result, ALIVE);
+    }
 }
 
 TEST(RulesTests, AliveMoreThanThreeNeighborsDies) {
@@ -42,25 +38,14 @@ TEST(RulesTests, AliveMoreThanThreeNeighborsDies) {
 
     //arrange
     CellState current = ALIVE;
-    int liveNeighborsFour = 4;
-    int liveNeighborsFive = 5;
-    int liveNeighborsSix = 6;
-    int liveNeighborsSeven = 7;
-    int liveNeighborsEight = 8;
 
     //act
-    CellState resultFour = LR.GetNewState(current, liveNeighborsFour);
-    CellState resultFive = LR.GetNewState(current, liveNeighborsFive);
-    CellState resultSix = LR.GetNewState(current, liveNeighborsSix);
-    CellState resultSeven = LR.GetNewState(current, liveNeighborsSeven);
-    CellState resultEight = LR.GetNewState(current, liveNeighborsEight);
+    for (int liveNeighbors = 4; liveNeighbors <= 8; liveNeighbors++) {
+        CellState result = LR.GetNewState(current, liveNeighbors);
 
-    //assert
-    EXPECT_EQ(resultFour, DEAD);
-    EXPECT_EQ(resultFive, DEAD);
-    EXPECT_EQ(resultSix, DEAD);
-    EXPECT_EQ(resultSeven, DEAD);
-    EXPECT_EQ(resultEight, DEAD);    
+        //assert
+        EXPECT_EQ(result, DEAD);
+    }
 }
 
 TEST(RulesTests, DeadThreeNeighborsLives) {
@@ -68,37 +53,17 @@ TEST(RulesTests, DeadThreeNeighborsLives) {
 
     //arrange
     CellState current = DEAD;
-    int liveNeighborsZero = 0;
-    int liveNeighborsOne = 1;
-    int liveNeighborsTwo = 2;
-    int liveNeighborsThree = 3;
-    int liveNeighborsFour = 4;
-    int liveNeighborsFive = 5;
-    int liveNeighborsSix = 6;
-    int liveNeighborsSeven = 7;
-    int liveNeighborsEight = 8;
 
     //act
-    CellState resultZero = LR.GetNewState(current, liveNeighborsZero);
-    CellState resultOne = LR.GetNewState(current, liveNeighborsOne);
-    CellState resultTwo = LR.GetNewState(current, liveNeighborsTwo);
-    CellState resultThree = LR.GetNewState(current, liveNeighborsThree);
-    CellState resultFour = LR.GetNewState(current, liveNeighborsFour);
-    CellState resultFive = LR.GetNewState(current, liveNeighborsFive);
-    CellState resultSix = LR.GetNewState(current, liveNeighborsSix);
-    CellState resultSeven = LR.GetNewState(current, liveNeighborsSeven);
-    CellState resultEight = LR.GetNewState(current, liveNeighborsEight);
+    for (int liveNeighbors = 0; liveNeighbors <= 8; liveNeighbors++) {
+        CellState result = LR.GetNewState(current, liveNeighbors);
 
-    //assert
-    EXPECT_EQ(resultZero, DEAD);
-    EXPECT_EQ(resultOne, DEAD);
-    EXPECT_EQ(resultTwo, DEAD);
-    EXPECT_EQ(resultThree, ALIVE);
-    EXPECT_EQ(resultFour, DEAD);
-    EXPECT_EQ(resultFive, DEAD);
-    EXPECT_EQ(resultSix, DEAD);
-    EXPECT_EQ(resultSeven, DEAD);
-    EXPECT_EQ(resultEight, DEAD);
+        //assert
+        if(liveNeighbors == 3)
+            EXPECT_EQ(result, ALIVE);
+        else
+            EXPECT_EQ(result, DEAD);
+    }
 }
 
 int main(int argc, char **argv) {
