@@ -7,12 +7,19 @@ namespace conway {
         public:
             CellState GetNewState(CellState currentState, int liveNeighbors) const {
                 CellState result = currentState;
-                if(currentState == ALIVE && liveNeighbors < 2)
-                    result = DEAD;
-                if(currentState == ALIVE && liveNeighbors > 3 )
-                    result = DEAD;
-                if(currentState == DEAD && liveNeighbors == 3)
-                    result = ALIVE;
+
+                switch(currentState) {
+                    case ALIVE:
+                        if (liveNeighbors < 2 || liveNeighbors > 3)
+                            result = DEAD;
+                        break;
+                    case DEAD:
+                        if (liveNeighbors == 3)
+                            result = ALIVE;
+                        break;
+                    default:
+                        break;
+                }
                 return result;
             }
     } const LR; //global constant instance responsible for running rules
