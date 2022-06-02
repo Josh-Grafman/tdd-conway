@@ -86,6 +86,20 @@ TEST(BoardTests, InitializeSize) {
     EXPECT_GE(b.getSize(), 3);
 }
 
+TEST(BoardTests, InitializeGrid) {
+    //arrange
+    int size = 3;
+    LifeBoard b(size);
+
+    //act
+    int columns = b.getColumnSize();
+    int rows = b.getRowSize();
+
+    //assert
+    EXPECT_EQ(columns, size);
+    EXPECT_EQ(rows, size);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
