@@ -59,6 +59,16 @@ namespace conway {
                 return state;
             }
             void setCellState(int x, int y, CellState state) { grid[x][y] = state; }
+
+            int liveNeighbors(int x, int y) const {
+                int nAlive = 0;
+
+                for (int i = -1; i <= 1; i++)
+                    for (int j = -1; j <= 1; j++)
+                        if (getCellState(x + j, y + i) == ALIVE && !(i == 0 && j == 0)) //skip ourself
+                            nAlive++;
+                return nAlive;
+            }
         private:
             int size;
             std::vector<std::vector<CellState>> grid;
