@@ -66,6 +66,26 @@ TEST(RulesTests, DeadThreeNeighborsLives) {
     }
 }
 
+TEST(BoardTests, InitializeSize) {
+    //arrange
+    int size = 3;
+    LifeBoard b(size);
+    
+    //act/assert
+    b.setSize(size);
+    EXPECT_EQ(b.getSize(), size);
+
+    //expect minimum board size of 3x3
+    b.setSize(-1);
+    EXPECT_GE(b.getSize(), 3);
+
+    b.setSize(0);
+    EXPECT_GE(b.getSize(), 3);
+
+    b.setSize(2);
+    EXPECT_GE(b.getSize(), 3);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
