@@ -45,12 +45,12 @@ namespace conway {
                 if(size >= 3)
                     this->size = size;
             }
-            int getSize() { return size; }
+            int getSize() const { return size; }
 
-            int getColumnSize() { return this->grid.size(); }
-            int getRowSize() { return this->grid[0].size(); }   //assume all rows are same length
+            int getColumnSize() const { return this->grid.size(); }
+            int getRowSize() const { return this->grid[0].size(); }   //assume all rows are same length
 
-            CellState getCellState(int x, int y) {
+            CellState getCellState(int x, int y) const {
                 CellState state;
                 if(-1 < x && x < size && -1 < y && y < size)    //avoid segfault
                     state = grid[x][y];
