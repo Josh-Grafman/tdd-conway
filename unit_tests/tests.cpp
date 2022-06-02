@@ -100,6 +100,27 @@ TEST(BoardTests, InitializeGrid) {
     EXPECT_EQ(rows, size);
 }
 
+TEST(BoardTests, SetGetCellState) {
+    //arrange
+    int size = 3;
+    int x = 1;
+    int y = 1;
+    LifeBoard b(size);
+
+    //act
+    CellState beforeSet = b.getCellState(x, y);
+    b.setCellState(x, y, ALIVE);
+    CellState afterSet = b.getCellState(x, y);
+    CellState outOfBoundsHigh = b.getCellState(x + 10, y + 10); //segfault if not caught
+    CellState outOfBoundsLow = b.getCellState(x - 10, y - 10);
+
+    //assert
+    EXPECT_EQ(beforeSet, DEAD);
+    EXPECT_EQ(afterSet, ALIVE);
+    EXPECT_EQ(outOfBoundsHigh, ERRSTATE);
+    EXPECT_EQ(outOfBoundsLow, ERRSTATE);
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

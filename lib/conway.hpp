@@ -3,7 +3,7 @@
 //declared namespace for this library
 namespace conway {
 
-    enum CellState {DEAD, ALIVE};
+    enum CellState {DEAD, ALIVE, ERRSTATE};
 
     class LifeRules {
         public:
@@ -49,6 +49,16 @@ namespace conway {
 
             int getColumnSize() { return this->grid.size(); }
             int getRowSize() { return this->grid[0].size(); }   //assume all rows are same length
+
+            CellState getCellState(int x, int y) {
+                CellState state;
+                if(-1 < x && x < size && -1 < y && y < size)    //avoid segfault
+                    state = grid[x][y];
+                else
+                    state = ERRSTATE; //read nonexistent cell
+                return state;
+            }
+            void setCellState(int x, int y, CellState state) { grid[x][y] = state; }
         private:
             int size;
             std::vector<std::vector<CellState>> grid;
