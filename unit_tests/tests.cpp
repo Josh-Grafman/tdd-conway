@@ -120,7 +120,7 @@ TEST(BoardTests, SetGetCellState) {
     EXPECT_EQ(outOfBoundsLow, ERRSTATE);
 }
 
-TEST(BoardTests, LiveNeighbors) {
+TEST(BoardTests, LiveNeighborsNormal) {
     //arrange
     int size = 3;
     LifeBoard b(size);
@@ -146,6 +146,47 @@ TEST(BoardTests, LiveNeighbors) {
     b.setCellState(x, y + 1, ALIVE);            //bottom
     numAlive.push_back(b.liveNeighbors(x, y));  //7
     b.setCellState(x + 1, y + 1, ALIVE);        //bottom right
+    numAlive.push_back(b.liveNeighbors(x, y));  //8
+
+    //assert
+    EXPECT_EQ(numAlive[0], 0);
+    EXPECT_EQ(numAlive[1], 1);
+    EXPECT_EQ(numAlive[2], 2);
+    EXPECT_EQ(numAlive[3], 3);
+    EXPECT_EQ(numAlive[4], 4);
+    EXPECT_EQ(numAlive[5], 4);
+    EXPECT_EQ(numAlive[6], 5);
+    EXPECT_EQ(numAlive[7], 6);
+    EXPECT_EQ(numAlive[8], 7);
+    EXPECT_EQ(numAlive[9], 8);
+}
+
+TEST(BoardTest, LiveNeighborsWrapping) {
+    //arrange
+    int size = 3;
+    LifeBoard b(size);
+    int x = 0, y = 0;   //target cell is top left corner on the grid
+    std::vector<int> numAlive;
+
+    //act
+    numAlive.push_back(b.liveNeighbors(x, y));  //0
+    b.setCellState(2, 2, ALIVE);                //top left
+    numAlive.push_back(b.liveNeighbors(x, y));  //1
+    b.setCellState(0, 2, ALIVE);                //top
+    numAlive.push_back(b.liveNeighbors(x, y));  //2
+    b.setCellState(1, 2, ALIVE);                //top right
+    numAlive.push_back(b.liveNeighbors(x, y));  //3
+    b.setCellState(2, 0, ALIVE);                //left
+    numAlive.push_back(b.liveNeighbors(x, y));  //4
+    b.setCellState(x, y, ALIVE);                //center (me)
+    numAlive.push_back(b.liveNeighbors(x, y));  //4
+    b.setCellState(1, 0, ALIVE);                //right
+    numAlive.push_back(b.liveNeighbors(x, y));  //5
+    b.setCellState(2, 1, ALIVE);                //bottom left
+    numAlive.push_back(b.liveNeighbors(x, y));  //6
+    b.setCellState(0, 1, ALIVE);                //bottom
+    numAlive.push_back(b.liveNeighbors(x, y));  //7
+    b.setCellState(1, 1, ALIVE);                //bottom right
     numAlive.push_back(b.liveNeighbors(x, y));  //8
 
     //assert
