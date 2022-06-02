@@ -91,9 +91,9 @@ namespace conway {
             void updateBoard() {
                 std::vector<std::vector<CellState>> newGrid;    //contains cellstates post rule application
 
-                for (int y = 0; y < size; y++) {
+                for (int x = 0; x < size; x++) {
                     std::vector<CellState> row;
-                    for (int x = 0; x < size; x++) {
+                    for (int y = 0; y < size; y++) {
                         row.push_back(LR.GetNewState(getCellState(x, y), liveNeighbors(x, y)));
                     }
                     newGrid.push_back(row);
