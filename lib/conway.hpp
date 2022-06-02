@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <string>
 
 //declared namespace for this library
 namespace conway {
@@ -76,16 +77,19 @@ namespace conway {
             }
 
             void renderBoard() {
+                std::string printout;
                 
                 for (int y = 0; y < size; y++) {
                     for (int x = 0; x < size; x++) {
-                        char symbol = '.';
+                        std::string symbol = ".";
                         if (getCellState(x, y) == ALIVE)
-                            symbol = '#';
-                        std::cout << symbol << ' ';
+                            symbol = "#";
+                        printout += symbol + ' ';
                     }
-                    std::cout << '\n';
+                    printout += '\n';
                 }
+
+                std::cout << printout;
             }
 
             void updateBoard() {
