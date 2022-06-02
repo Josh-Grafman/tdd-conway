@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 
 //declared namespace for this library
 namespace conway {
@@ -39,6 +40,9 @@ namespace conway {
                 for (int i = 0; i < this->size; i++)
                     grid.push_back(cv);
             }
+            LifeBoard(std::vector<std::vector<CellState>> grid) {
+                this->grid = grid;
+            }
             ~LifeBoard() {}
 
             void setSize(int size) {
@@ -58,6 +62,7 @@ namespace conway {
                     state = ERRSTATE; //read nonexistent cell
                 return state;
             }
+
             void setCellState(int x, int y, CellState state) { grid[x][y] = state; }
 
             int liveNeighbors(int x, int y) const {
@@ -69,9 +74,36 @@ namespace conway {
                             nAlive++;
                 return nAlive;
             }
+
+            void renderBoard() {
+                
+                for (int y = 0; y < size; y++) {
+                    for (int x = 0; x < size; x++) {
+                        char symbol = '.';
+                        if (getCellState(x, y) == ALIVE)
+                            symbol = '#';
+                        std::cout << symbol << ' ';
+                    }
+                    std::cout << '\n';
+                }
+            }
+
+            void updateBoard() {
+                std::vector<std::vector<CellState>> newGrid;    //contains cellstates post rule application
+
+                for (int y = 0; y < size; y++) {
+                    std::vector<CellState> row;
+                    for (int x = 0; x < size; x++) {
+                        row.push_back(LR.GetNewState(getCellState(x, y), liveNeighbors(x, y)));
+                    }
+                    newGrid.push_back(row);
+                }
+
+                this->grid = newGrid;
+            }
+
         private:
             int size;
             std::vector<std::vector<CellState>> grid;
-            std::vector<std::vector<CellState>> gridBuff; //store states that will be rendered on next cycle
     };
 }
