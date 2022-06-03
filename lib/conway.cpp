@@ -66,7 +66,12 @@ int LifeBoard::liveNeighbors(int x, int y) const {
     return nAlive;
 }
 
-void LifeBoard::renderBoard() {
+void LifeBoard::setBoard(std::vector<int> coordinates) {
+    for (int i = 0; i < coordinates.size(); i += 2)
+        setCellState(coordinates[i], coordinates[i+1], ALIVE);
+}
+
+void LifeBoard::renderBoard() const {
     std::string printout;
                 
     for (int y = 0; y < size; y++) {

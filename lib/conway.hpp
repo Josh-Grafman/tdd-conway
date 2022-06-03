@@ -29,8 +29,8 @@ namespace conway {
 
             int liveNeighbors(int x, int y) const;
 
-            void renderBoard();
-
+            void setBoard(std::vector<int>);
+            void renderBoard() const;
             void updateBoard();
 
         private:
