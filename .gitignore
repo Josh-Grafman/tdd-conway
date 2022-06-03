@@ -1,6 +1,8 @@
-driver
-runTests
-CMake*
-cmake_*
-Makefile
 .vscode
+run*
+*.o
+cmake*
+Make*
+CMake*
+build
+!CMakeLists.txt
