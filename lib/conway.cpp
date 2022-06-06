@@ -2,23 +2,6 @@
 
 using namespace conway;
 
-CellState LifeRules::GetNewState(CellState currentState, int liveNeighbors) const {
-    CellState result = currentState;
-
-    switch(currentState) {
-        case ALIVE:
-            if (liveNeighbors < 2 || liveNeighbors > 3)
-                result = DEAD;
-            break;
-        case DEAD:
-            if (liveNeighbors == 3)
-                result = ALIVE;
-            break;
-        default:
-            break;
-    }
-    return result;
-}
 
 LifeBoard::LifeBoard(int size) {
     setSize(size);
@@ -66,6 +49,24 @@ int LifeBoard::liveNeighbors(int x, int y) const {
     return nAlive;
 }
 
+CellState LifeBoard::GetNewState(CellState currentState, int liveNeighbors) const {
+    CellState result = currentState;
+
+    switch(currentState) {
+        case ALIVE:
+            if (liveNeighbors < 2 || liveNeighbors > 3)
+                result = DEAD;
+            break;
+        case DEAD:
+            if (liveNeighbors == 3)
+                result = ALIVE;
+            break;
+        default:
+            break;
+    }
+    return result;
+}
+
 void LifeBoard::setBoard(std::vector<int> coordinates) {
     for (int i = 0; i < coordinates.size(); i += 2)
         setCellState(coordinates[i], coordinates[i+1], ALIVE);
@@ -93,7 +94,7 @@ void LifeBoard::updateBoard() {
     for (int x = 0; x < size; x++) {
         std::vector<CellState> row;
         for (int y = 0; y < size; y++) {
-            row.push_back(LR.GetNewState(getCellState(x, y), liveNeighbors(x, y)));
+            row.push_back(GetNewState(getCellState(x, y), liveNeighbors(x, y)));
         }
         newGrid.push_back(row);
     }

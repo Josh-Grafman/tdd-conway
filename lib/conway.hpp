@@ -10,11 +10,6 @@ namespace conway {
 
     enum CellState {DEAD, ALIVE, ERRSTATE};
 
-    class LifeRules {
-        public:
-            CellState GetNewState(CellState currentState, int liveNeighbors) const;
-    } const LR; //global constant instance responsible for running rules
-
     class LifeBoard {
         public:
             LifeBoard(int size);
@@ -31,6 +26,7 @@ namespace conway {
             void setCellState(int x, int y, CellState state);
 
             int liveNeighbors(int x, int y) const;
+            CellState GetNewState(CellState currentState, int liveNeighbors) const;
 
             void setBoard(std::vector<int>);
             void renderBoard() const;

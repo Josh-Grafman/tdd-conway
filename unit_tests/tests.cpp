@@ -7,6 +7,7 @@ TEST(RulesTests, AliveLessThanTwoNeighborsDies) {
     //Any live cell with fewer than two live neighbours dies
     
     //arrange
+    LifeBoard LR(3);
     CellState current = ALIVE;
 
     //act
@@ -22,6 +23,7 @@ TEST(RulesTests, AliveTwoToThreeNeighborsLives) {
     //Any live cell with two or three live neighbours lives on to the next generation
 
     //arrange
+    LifeBoard LR(3);
     CellState current = ALIVE;
     
     //act
@@ -37,6 +39,7 @@ TEST(RulesTests, AliveMoreThanThreeNeighborsDies) {
     //Any live cell with more than three live neighbours dies
 
     //arrange
+    LifeBoard LR(3);
     CellState current = ALIVE;
 
     //act
@@ -52,6 +55,7 @@ TEST(RulesTests, DeadThreeNeighborsLives) {
     //Any dead cell with exactly three live neighbours becomes a live cell
 
     //arrange
+    LifeBoard LR(3);
     CellState current = DEAD;
 
     //act
