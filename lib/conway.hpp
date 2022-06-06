@@ -1,3 +1,6 @@
+#ifndef CONWAY_H
+#define CONWAY_H
+
 #include <vector>
 #include <iostream>
 #include <string>
@@ -38,3 +41,5 @@ namespace conway {
             std::vector<std::vector<CellState>> grid;
     };
 }
+
+#endif //CONWAY_H

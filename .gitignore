@@ -1,8 +1,5 @@
 .vscode
-run*
+run
+test
 *.o
-cmake*
-Make*
-CMake*
-build
-!CMakeLists.txt
+*.a
