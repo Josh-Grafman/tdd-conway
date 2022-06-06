@@ -161,7 +161,7 @@ TEST(BoardTests, LiveNeighborsNormal) {
     EXPECT_EQ(numAlive[9], 8);
 }
 
-TEST(BoardTest, LiveNeighborsWrapping) {
+TEST(BoardTests, LiveNeighborsWrapping) {
     //arrange
     int size = 3;
     LifeBoard b(size);
